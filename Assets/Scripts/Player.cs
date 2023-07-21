@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class Player : MonoBehaviour {
     [SerializeField] private float moveSpeed;
@@ -11,6 +12,8 @@ public class Player : MonoBehaviour {
     [SerializeField] private float changeSizeTime;
     [SerializeField] private float changeSizeInterval;
 
+    [SerializeField] private CinemachineVirtualCamera[] cams;
+
     private Animator animator;
     private Rigidbody2D rb;
 
@@ -18,6 +21,7 @@ public class Player : MonoBehaviour {
     private bool shouldJump;
     private bool grounded;
 
+    private int sizeIndex;
     private bool changingSize;
         
     void Awake() {
@@ -32,14 +36,13 @@ public class Player : MonoBehaviour {
             shouldJump = true;
         }
 
-        // TODO: should limit to just two states of growth, maybe use Dictionary/array to track?
         if (!changingSize) {
             // Start coroutines to change size
-            if (Input.GetKeyDown(KeyCode.P)) {
+            if (sizeIndex < 2 && Input.GetKeyDown(KeyCode.P)) {
                 StartCoroutine(ChangeSize(true));
             }
 
-            if (Input.GetKeyDown(KeyCode.L)) {
+            if (sizeIndex > 0 && Input.GetKeyDown(KeyCode.L)) {
                 StartCoroutine(ChangeSize(false));
             }
 
@@ -67,7 +70,9 @@ public class Player : MonoBehaviour {
         grounded = Physics2D.OverlapCircle(groundCheck.position, 0.05f, groundLayer);
 
         if (grounded && shouldJump) {
-            currVelocity.y = jumpSpeed;
+            // TODO: Probably better to just index into an array of predefined jump velocities, easier to test
+            float largeFactor = sizeIndex * 2f;
+            currVelocity.y = jumpSpeed + largeFactor;
             shouldJump = false;
         }
         rb.velocity = currVelocity;
@@ -80,6 +85,12 @@ public class Player : MonoBehaviour {
         Vector3 target = grow ? localScale * 2 : localScale / 2;
         target.z = 1;
         float currTime = 0f;
+
+        int nextIndex = sizeIndex = grow ? sizeIndex + 1 : sizeIndex - 1;
+
+        cams[sizeIndex].m_Priority = 0;
+        yield return null;
+        cams[nextIndex].m_Priority = 10;
 
         while (currTime < changeSizeTime) {
             Vector3 currScale = Vector3.Lerp(localScale, target, currTime / changeSizeTime);
@@ -96,6 +107,15 @@ public class Player : MonoBehaviour {
             currTime += changeSizeInterval;
         }
 
+        // Set scale one final time
+        if (horizontal > 0) {
+            target.x = Mathf.Abs(target.x);
+        } else if (horizontal < 0) {
+            target.x = -Mathf.Abs(target.x);
+        }
+        transform.localScale = target;
+
+        sizeIndex = nextIndex;
         changingSize = false;
     }
 }
