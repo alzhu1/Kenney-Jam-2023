@@ -12,11 +12,13 @@ public class Player : MonoBehaviour {
     [SerializeField] private float changeSizeTime;
     [SerializeField] private float changeSizeInterval;
 
-    [SerializeField] private CinemachineVirtualCamera[] cams;
+    // [SerializeField] private CinemachineVirtualCamera[] cams;
 
     private Animator animator;
     private BoxCollider2D box;
     private Rigidbody2D rb;
+
+    private CinemachineVirtualCamera[] cams;
 
     private float horizontal;
     private bool shouldJump;
@@ -29,6 +31,14 @@ public class Player : MonoBehaviour {
         animator = GetComponent<Animator>();
         box = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
+
+        cams = GameObject.Find("Cameras").GetComponentsInChildren<CinemachineVirtualCamera>();
+    }
+
+    void Start() {
+        foreach (CinemachineVirtualCamera cam in cams) {
+            cam.m_Follow = transform;
+        }
     }
 
     void Update() {
