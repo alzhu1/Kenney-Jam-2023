@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class LevelName : MonoBehaviour {
     [SerializeField] private float showTime;
+    [SerializeField] private Image bg;
 
     private Text levelNameText;
 
@@ -29,6 +30,12 @@ public class LevelName : MonoBehaviour {
             levelNameText.color = Color.Lerp(currTextColor, target, time);
             yield return null;
             time += Time.deltaTime;
+
+            if (levelNameText.color.a < bg.color.a) {
+                Color bgColor = bg.color;
+                bgColor.a = levelNameText.color.a;
+                bg.color = bgColor;
+            }
         }
         levelNameText.enabled = false;
     }
