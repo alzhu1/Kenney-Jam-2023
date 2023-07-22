@@ -110,8 +110,11 @@ public class Player : MonoBehaviour {
         Vector3 localScale = transform.localScale;
         Vector3 target = grow ? localScale * 2 : localScale / 2;
         target.z = 1;
-        float currTime = 0f;
 
+        float currEdgeRadius = box.edgeRadius;
+        float targetEdgeRadius = grow ? currEdgeRadius * 2 : currEdgeRadius / 2;
+
+        float currTime = 0f;
         int nextIndex = sizeIndex = grow ? sizeIndex + 1 : sizeIndex - 1;
 
         cams[sizeIndex].m_Priority = 0;
@@ -120,6 +123,7 @@ public class Player : MonoBehaviour {
 
         while (currTime < changeSizeTime) {
             Vector3 currScale = Vector3.Lerp(localScale, target, currTime / changeSizeTime);
+            box.edgeRadius = Mathf.Lerp(currEdgeRadius, targetEdgeRadius, currTime / changeSizeTime);
 
             // Handle left/right flipping
             if (horizontal > 0) {
@@ -140,6 +144,7 @@ public class Player : MonoBehaviour {
             target.x = -Mathf.Abs(target.x);
         }
         transform.localScale = target;
+        box.edgeRadius = targetEdgeRadius;
 
         sizeIndex = nextIndex;
         changingSize = false;

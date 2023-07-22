@@ -7,9 +7,6 @@ public class Switch : MonoBehaviour {
     [SerializeField] private Sprite offSprite;
     [SerializeField] private GameObject connection;
 
-    [SerializeField] private bool on;
-    [SerializeField] private bool oneWay; // TODO: Not sure if this is necessary
-
     private SpriteRenderer sr;
 
     void Awake() {
@@ -17,23 +14,14 @@ public class Switch : MonoBehaviour {
     }
 
     void Start() {
-        sr.sprite = on ? onSprite : offSprite;
-    }
-
-    void Update() {
-        
+        sr.sprite = onSprite;
     }
 
     void OnTriggerEnter2D(Collider2D collider) {
         // TODO: Audio sound upon switch click? Also should I check for player layer?
-        if (!on) {
-            connection.SetActive(false);
-            on = true;
-        } else if (!oneWay) {
-            connection.SetActive(true);
-            on = false;
-        }
+        // Would be good to generalize, but this version of the game doesn't need it
+        connection.SetActive(false);
 
-        sr.sprite = on ? onSprite : offSprite;
+        sr.sprite = offSprite;
     }
 }

@@ -60,6 +60,17 @@ public class AudioManager : MonoBehaviour {
         return s;
     }
 
+    /**
+        TODO: Sound names needed
+
+        BGM
+        ButtonClick
+        SwitchHit
+        Grow
+        Shrink
+        LevelWin
+    */
+
     Sound Play(int i) {
         Sound s = sounds[i];
         if (s == null || s.source == null) {

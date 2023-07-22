@@ -168,8 +168,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.72798705, y: 0.6944702}
-  m_EdgeRadius: 0
+  m_Size: {x: 0.36, y: 0.32}
+  m_EdgeRadius: 0.18
 --- !u!95 &552296090337320189
 Animator:
   serializedVersion: 4
@@ -214,10 +214,6 @@ MonoBehaviour:
     m_Bits: 1
   changeSizeTime: 0.3
   changeSizeInterval: 0.03
-  cams:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1 &552296090413832257
 GameObject:
   m_ObjectHideFlags: 0

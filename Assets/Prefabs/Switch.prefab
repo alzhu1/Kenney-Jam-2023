@@ -173,11 +173,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 874f2898af0994a6083964e6d76bb939, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onSprite: {fileID: -2136771412, guid: 87e36d449858d40fd90175d42f60fd67, type: 3}
-  offSprite: {fileID: -1422497811, guid: 87e36d449858d40fd90175d42f60fd67, type: 3}
+  onSprite: {fileID: -1422497811, guid: 87e36d449858d40fd90175d42f60fd67, type: 3}
+  offSprite: {fileID: -2136771412, guid: 87e36d449858d40fd90175d42f60fd67, type: 3}
   connection: {fileID: 6223507463879342517}
-  on: 0
-  oneWay: 1
 --- !u!68 &3949444921016943371
 EdgeCollider2D:
   m_ObjectHideFlags: 0
