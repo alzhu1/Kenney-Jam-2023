@@ -60,18 +60,7 @@ public class AudioManager : MonoBehaviour {
         return s;
     }
 
-    /**
-        TODO: Sound names needed
-
-        Also, might need to add options for volume and SFX adjustment/disabling?
-
-        ButtonClick
-        SwitchHit
-        Grow
-        Shrink
-        LevelWin
-    */
-
+    // TODO: Add options for volume/SFX adjustment and disabling?
     Sound Play(int i) {
         Sound s = sounds[i];
         if (s == null || s.source == null) {

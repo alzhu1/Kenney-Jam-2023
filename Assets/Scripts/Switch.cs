@@ -18,7 +18,7 @@ public class Switch : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D collider) {
-        // TODO: Audio sound upon switch click? Also should I check for player layer?
+        AudioManager.instance.Play("SwitchHit");
         // Would be good to generalize, but this version of the game doesn't need it
         connection.SetActive(false);
 

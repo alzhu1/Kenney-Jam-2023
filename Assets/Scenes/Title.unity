@@ -148511,9 +148511,51 @@ MonoBehaviour:
   sounds:
   - name: BGM
     clip: {fileID: 8300000, guid: afc9ad214160a418f8b889275b87c50e, type: 3}
-    volume: 0.3
+    volume: 0.2
     loop: 1
     pitch: 1
+    source: {fileID: 0}
+  - name: SwitchHit
+    clip: {fileID: 8300000, guid: eb17fd59165e64c4aa50c1b18c7b15e4, type: 3}
+    volume: 0.4
+    loop: 0
+    pitch: 1
+    source: {fileID: 0}
+  - name: ButtonClick
+    clip: {fileID: 8300000, guid: 0b164d9d0729842f6aab601c933130c5, type: 3}
+    volume: 0.8
+    loop: 0
+    pitch: 1.5
+    source: {fileID: 0}
+  - name: Grow
+    clip: {fileID: 8300000, guid: 334778426250b4020a049c912f529d87, type: 3}
+    volume: 0.4
+    loop: 0
+    pitch: 0.4
+    source: {fileID: 0}
+  - name: Shrink
+    clip: {fileID: 8300000, guid: 5a50435b8d9314ec391a15d29f4e3074, type: 3}
+    volume: 0.2
+    loop: 0
+    pitch: 0.6
+    source: {fileID: 0}
+  - name: LevelWin
+    clip: {fileID: 8300000, guid: f2840d85bfffa440b85d334d16e695bf, type: 3}
+    volume: 0.45
+    loop: 0
+    pitch: 1
+    source: {fileID: 0}
+  - name: Jump
+    clip: {fileID: 8300000, guid: aadddab51f204432caac7154645f4a41, type: 3}
+    volume: 0.1
+    loop: 0
+    pitch: 1.4
+    source: {fileID: 0}
+  - name: CannotGrow
+    clip: {fileID: 8300000, guid: a9a369d213ecc435a9356635c6d1c703, type: 3}
+    volume: 0.4
+    loop: 0
+    pitch: 0.5
     source: {fileID: 0}
 --- !u!1 &2003962584
 GameObject:

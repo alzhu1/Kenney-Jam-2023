@@ -12,8 +12,6 @@ public class Player : MonoBehaviour {
     [SerializeField] private float changeSizeTime;
     [SerializeField] private float changeSizeInterval;
 
-    // [SerializeField] private CinemachineVirtualCamera[] cams;
-
     private Animator animator;
     private BoxCollider2D box;
     private Rigidbody2D rb;
@@ -84,6 +82,7 @@ public class Player : MonoBehaviour {
         grounded = Physics2D.OverlapArea(pos + cornerOffset, pos - cornerOffset, groundLayer);
 
         if (grounded && shouldJump) {
+            AudioManager.instance.Play("Jump");
             // TODO: Probably better to just index into an array of predefined jump velocities, easier to test
             float largeFactor = sizeIndex * 2f;
             currVelocity.y = jumpSpeed + largeFactor;
@@ -93,6 +92,8 @@ public class Player : MonoBehaviour {
     }
 
     IEnumerator ChangeSize(bool grow) {
+        changingSize = true;
+
         if (grow) {
             bool[] checks = new bool[directionChecks.Length];
             for (int i = 0; i < directionChecks.Length; i++) {
@@ -100,12 +101,15 @@ public class Player : MonoBehaviour {
                 checks[i] = Physics2D.OverlapCircle(futurePos, 0.05f, groundLayer);
 
                 if (i >= 2 && checks[i] && checks[i - 2]) {
+                    AudioManager.instance.Play("CannotGrow");
+                    yield return new WaitForSeconds(changeSizeTime);
+                    changingSize = false;
                     yield break;
                 }
             }
         }
 
-        changingSize = true;
+        AudioManager.instance.Play(grow ? "Grow" : "Shrink");
 
         Vector3 localScale = transform.localScale;
         Vector3 target = grow ? localScale * 2 : localScale / 2;
@@ -149,12 +153,4 @@ public class Player : MonoBehaviour {
         sizeIndex = nextIndex;
         changingSize = false;
     }
-
-    // void OnDrawGizmos() {
-    //     Gizmos.color = Color.red;
-    //     // Gizmos.DrawSphere(transform.position, temp);
-    //     Vector3 extents = box.bounds.extents;
-    //     Vector3 pos = (Vector3)box.offset + transform.position;
-    //     Gizmos.DrawLine(box.bounds.center+ new Vector3(extents.x, extents.y) * 2, box.bounds.center - new Vector3(extents.x, extents.y) * 2);
-    // }
 }

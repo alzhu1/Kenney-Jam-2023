@@ -62,6 +62,8 @@ public class Title : MonoBehaviour {
     }
 
     public void LoadLevel(int index) {
+        // Button will trigger this
+        AudioManager.instance.Play("ButtonClick");
         LevelManager.instance.LoadLevel(index);
     }
 }

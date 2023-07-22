@@ -8,4 +8,4 @@ Other assets (i.e. font, music, SFX) used:
 
 https://tallbeard.itch.io/music-loop-bundle
 https://www.dafont.com/pixellari.font
-SFX: tbd
+https://coloralpha.itch.io/50-menu-interface-sfx
