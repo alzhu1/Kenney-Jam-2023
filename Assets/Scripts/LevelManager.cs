@@ -9,6 +9,8 @@ public class LevelManager : MonoBehaviour {
     private bool loading;
     private bool[] accessibleLevels;
 
+    private Dictionary<int, HashSet<int>> completedConnections;
+
     void Awake() {
         if (instance == null) {
             instance = this;
@@ -28,6 +30,10 @@ public class LevelManager : MonoBehaviour {
             accessibleLevels = new bool[SceneManager.sceneCountInBuildSettings];
             accessibleLevels[0] = true;
             accessibleLevels[1] = true;
+        }
+
+        if (completedConnections == null) {
+            completedConnections = new Dictionary<int, HashSet<int>>();
         }
     }
 
@@ -50,7 +56,12 @@ public class LevelManager : MonoBehaviour {
 
         accessibleLevels[index] = true;
 
-        // TODO: Also track connections
+        int completedIndex = SceneManager.GetActiveScene().buildIndex;
+        if (!completedConnections.ContainsKey(completedIndex)) {
+            completedConnections.Add(completedIndex, new HashSet<int>());
+        }
+        completedConnections[completedIndex].Add(index);
+
         SceneManager.LoadScene(index);
 
         loading = true;
@@ -68,5 +79,9 @@ public class LevelManager : MonoBehaviour {
 
     public bool IsLevelIndexAccessible(int index) {
         return accessibleLevels[index];
+    }
+
+    public bool IsConnectionVisible(int fromIndex, int toIndex) {
+        return completedConnections.ContainsKey(fromIndex) && completedConnections[fromIndex].Contains(toIndex);
     }
 }
