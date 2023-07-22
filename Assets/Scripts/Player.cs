@@ -50,11 +50,12 @@ public class Player : MonoBehaviour {
 
         if (!changingSize) {
             // Start coroutines to change size
-            if (sizeIndex < 2 && Input.GetKeyDown(KeyCode.P)) {
+            float vertical = Input.GetAxisRaw("Vertical");
+            if (sizeIndex < 2 && vertical > 0) {
                 StartCoroutine(ChangeSize(true));
             }
 
-            if (sizeIndex > 0 && Input.GetKeyDown(KeyCode.L)) {
+            if (sizeIndex > 0 && vertical < 0) {
                 StartCoroutine(ChangeSize(false));
             }
 
@@ -78,7 +79,7 @@ public class Player : MonoBehaviour {
         Vector2 currVelocity = rb.velocity;
         currVelocity.x = horizontal * moveSpeed * Time.fixedDeltaTime;
 
-        Vector2 cornerOffset = new Vector2(box.bounds.extents.x, 0.05f);
+        Vector2 cornerOffset = new Vector2(box.bounds.extents.x - 0.1f, 0.05f);
         Vector2 pos = directionChecks[0].position;
         grounded = Physics2D.OverlapArea(pos + cornerOffset, pos - cornerOffset, groundLayer);
 
