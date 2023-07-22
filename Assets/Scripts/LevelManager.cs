@@ -7,15 +7,27 @@ public class LevelManager : MonoBehaviour {
     public static LevelManager instance = null;
 
     private bool loading;
+    private bool[] accessibleLevels;
 
     void Awake() {
         if (instance == null) {
             instance = this;
+            instance.Init();
             DontDestroyOnLoad(gameObject);
         } else {
-            instance.loading = false;
+            instance.Init();
             Destroy(gameObject);
             return;
+        }
+    }
+
+    void Init() {
+        loading = false;
+
+        if (accessibleLevels == null) {
+            accessibleLevels = new bool[SceneManager.sceneCountInBuildSettings];
+            accessibleLevels[0] = true;
+            accessibleLevels[1] = true;
         }
     }
 
@@ -36,11 +48,11 @@ public class LevelManager : MonoBehaviour {
             return;
         }
 
-        if (index >= SceneManager.sceneCountInBuildSettings) {
-            LoadTitle();
-        } else {
-            SceneManager.LoadScene(index);
-        }
+        accessibleLevels[index] = true;
+
+        // TODO: Also track connections
+        SceneManager.LoadScene(index);
+
         loading = true;
     }
 
@@ -52,5 +64,9 @@ public class LevelManager : MonoBehaviour {
     public void LoadTitle() {
         SceneManager.LoadScene(0);
         loading = true;
+    }
+
+    public bool IsLevelIndexAccessible(int index) {
+        return accessibleLevels[index];
     }
 }
