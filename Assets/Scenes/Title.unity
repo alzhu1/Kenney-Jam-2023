@@ -148475,7 +148475,7 @@ GameObject:
   - component: {fileID: 1989004501}
   - component: {fileID: 1989004502}
   m_Layer: 0
-  m_Name: AudioManager
+  m_Name: Audio Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -148508,7 +148508,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e42fbcda84d4c498f938972b5c502cf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
+  sounds:
+  - name: BGM
+    clip: {fileID: 8300000, guid: afc9ad214160a418f8b889275b87c50e, type: 3}
+    volume: 0.3
+    loop: 1
+    pitch: 1
+    source: {fileID: 0}
 --- !u!1 &2003962584
 GameObject:
   m_ObjectHideFlags: 0

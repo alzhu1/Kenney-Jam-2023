@@ -63,7 +63,8 @@ public class AudioManager : MonoBehaviour {
     /**
         TODO: Sound names needed
 
-        BGM
+        Also, might need to add options for volume and SFX adjustment/disabling?
+
         ButtonClick
         SwitchHit
         Grow
