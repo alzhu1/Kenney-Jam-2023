@@ -17,12 +17,11 @@ public class LevelManager : MonoBehaviour {
     }
 
     public void LoadLevel(int index) {
-        SceneManager.LoadScene(index);
-    }
-
-    public void LoadNextLevel() {
-        int index = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene((index + 1) % SceneManager.sceneCountInBuildSettings);
+        if (index >= SceneManager.sceneCountInBuildSettings) {
+            LoadTitle();
+        } else {
+            SceneManager.LoadScene(index);
+        }
     }
 
     public void RestartLevel() {
