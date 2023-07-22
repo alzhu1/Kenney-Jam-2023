@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 2463958032866714598}
   - component: {fileID: 2463958032866714521}
   - component: {fileID: 2463958032866714597}
+  - component: {fileID: 3949444921016943371}
+  - component: {fileID: 7672799523340137886}
   m_Layer: 0
   m_Name: Switch
   m_TagString: Untagged
@@ -176,6 +178,50 @@ MonoBehaviour:
   connection: {fileID: 6223507463879342517}
   on: 0
   oneWay: 1
+--- !u!68 &3949444921016943371
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2463958032866714595}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.51, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: 0, y: -0.5}
+  - {x: 0, y: 0.5}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
+--- !u!68 &7672799523340137886
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2463958032866714595}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.51, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: 0, y: -0.5}
+  - {x: 0, y: 0.5}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!1 &6223507463879342517
 GameObject:
   m_ObjectHideFlags: 0
