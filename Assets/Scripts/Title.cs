@@ -38,8 +38,6 @@ public class Title : MonoBehaviour {
 
     void Start() {
         for (int i = 0; i < buttons.Length; i++) {
-            Debug.Log(buttons[i]);
-            Debug.Log($"{i}, {buttons.Length}");
             buttons[i].interactable = LevelManager.instance.IsLevelIndexAccessible(i + 1);
         }
 

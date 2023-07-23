@@ -35,6 +35,10 @@ public class LevelManager : MonoBehaviour {
         if (completedConnections == null) {
             completedConnections = new Dictionary<int, HashSet<int>>();
         }
+
+        if (TransitionManager.instance != null) {
+            StartCoroutine(TransitionManager.instance.Fade(true));
+        }
     }
 
     void Update() {
@@ -62,19 +66,21 @@ public class LevelManager : MonoBehaviour {
         }
         completedConnections[completedIndex].Add(index);
 
-        SceneManager.LoadScene(index);
-
-        loading = true;
+        StartCoroutine(Load(index));
     }
 
     public void RestartLevel() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        loading = true;
+        StartCoroutine(Load(SceneManager.GetActiveScene().buildIndex));
     }
 
     public void LoadTitle() {
-        SceneManager.LoadScene(0);
+        StartCoroutine(Load(0));
+    }
+
+    IEnumerator Load(int index) {
         loading = true;
+        yield return StartCoroutine(TransitionManager.instance.Fade(false));
+        SceneManager.LoadScene(index);
     }
 
     public bool IsLevelIndexAccessible(int index) {
