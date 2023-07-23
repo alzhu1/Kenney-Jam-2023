@@ -5,11 +5,13 @@ using UnityEngine;
 public class Goal : MonoBehaviour {
     [SerializeField] private int nextLevelIndex;
 
+    private bool triggered;
+
     void OnTriggerEnter2D(Collider2D collider) {
-        if (collider.gameObject.layer == 6) { // Player layer
+        if (!triggered && collider.gameObject.layer == 6) { // Player layer
             AudioManager.instance.Play("LevelWin");
-            // TODO: Probably add some transition here
             LevelManager.instance.LoadLevel(nextLevelIndex);
+            triggered = true;
         }
     }
 }

@@ -9,6 +9,8 @@ public class Switch : MonoBehaviour {
 
     private SpriteRenderer sr;
 
+    private bool hit;
+
     void Awake() {
         sr = GetComponent<SpriteRenderer>();
     }
@@ -18,10 +20,12 @@ public class Switch : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D collider) {
-        AudioManager.instance.Play("SwitchHit");
-        // Would be good to generalize, but this version of the game doesn't need it
-        connection.SetActive(false);
-
-        sr.sprite = offSprite;
+        if (!hit) {
+            AudioManager.instance.Play("SwitchHit");
+            // Would be good to generalize, but this version of the game doesn't need it
+            connection.SetActive(false);
+            sr.sprite = offSprite;
+            hit = true;
+        }
     }
 }
