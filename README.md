@@ -1,5 +1,11 @@
 # Kenney Jam 2023
 
+Game Title: Growth Spurt Dungeoneer
+
+Time spent (dates are based on USA west coast):
+Day 1 (7/21): ~10 hrs?
+Day 2 (7/22): ~13 hrs
+
 Kenney assets used:
 https://kenney.nl/assets/1-bit-pack
 https://kenney.nl/assets/ui-pack
