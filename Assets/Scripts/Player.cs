@@ -5,12 +5,14 @@ using Cinemachine;
 
 public class Player : MonoBehaviour {
     [SerializeField] private float moveSpeed;
-    [SerializeField] private float jumpSpeed;
+    [SerializeField] private float[] jumpSpeeds;
     [SerializeField] private Transform[] directionChecks;
     [SerializeField] private LayerMask groundLayer;
 
     [SerializeField] private float changeSizeTime;
     [SerializeField] private float changeSizeInterval;
+
+    [SerializeField] private bool isTitle = false;
 
     private Animator animator;
     private BoxCollider2D box;
@@ -34,12 +36,23 @@ public class Player : MonoBehaviour {
     }
 
     void Start() {
-        foreach (CinemachineVirtualCamera cam in cams) {
-            cam.m_Follow = transform;
+        if (isTitle) {
+            StartCoroutine(PlayerTitle());
+        } else {
+            foreach (CinemachineVirtualCamera cam in cams) {
+                cam.m_Follow = transform;
+            }
         }
     }
 
     void Update() {
+        animator.SetFloat("xSpeed", Mathf.Abs(rb.velocity.x));
+        animator.SetBool("Grounded", grounded);
+
+        if (isTitle) {
+            return;
+        }
+
         horizontal = Input.GetAxisRaw("Horizontal");
 
         if (grounded && !shouldJump && Input.GetButtonDown("Jump")) {
@@ -68,9 +81,6 @@ public class Player : MonoBehaviour {
             localScale.z = 1;
             transform.localScale = localScale;
         }
-
-        animator.SetFloat("xSpeed", Mathf.Abs(rb.velocity.x));
-        animator.SetBool("Grounded", grounded);
     }
 
     void FixedUpdate() {
@@ -83,9 +93,7 @@ public class Player : MonoBehaviour {
 
         if (grounded && shouldJump) {
             AudioManager.instance.Play("Jump");
-            // TODO: Probably better to just index into an array of predefined jump velocities, easier to test
-            float largeFactor = sizeIndex * 2f;
-            currVelocity.y = jumpSpeed + largeFactor;
+            currVelocity.y = jumpSpeeds[sizeIndex];
             shouldJump = false;
         }
         rb.velocity = currVelocity;
@@ -121,9 +129,11 @@ public class Player : MonoBehaviour {
         float currTime = 0f;
         int nextIndex = sizeIndex = grow ? sizeIndex + 1 : sizeIndex - 1;
 
-        cams[sizeIndex].m_Priority = 0;
-        yield return null;
-        cams[nextIndex].m_Priority = 10;
+        if (!isTitle) {
+            cams[sizeIndex].m_Priority = 0;
+            yield return null;
+            cams[nextIndex].m_Priority = 10;
+        }
 
         while (currTime < changeSizeTime) {
             Vector3 currScale = Vector3.Lerp(localScale, target, currTime / changeSizeTime);
@@ -152,5 +162,31 @@ public class Player : MonoBehaviour {
 
         sizeIndex = nextIndex;
         changingSize = false;
+    }
+
+    IEnumerator PlayerTitle() {
+        while (true) {
+            if (sizeIndex == 1) {
+                // Can jump, grow, or shrink
+                float chance = Random.Range(0f, 1f);
+
+                if (chance <= 0.33f) {
+                    shouldJump = true;
+                } else {
+                    yield return StartCoroutine(ChangeSize(chance <= 0.66f));
+                }
+            } else {
+                // Can jump or grow/shrink depending on size index
+                float chance = Random.Range(0f, 1f);
+
+                if (chance <= 0.5f) {
+                    shouldJump = true;
+                } else {
+                    yield return StartCoroutine(ChangeSize(sizeIndex == 0));
+                }
+            }
+
+            yield return new WaitForSeconds(2.2f);
+        }
     }
 }

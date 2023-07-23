@@ -203,7 +203,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 250
-  jumpSpeed: 6
+  jumpSpeeds:
+  - 6
+  - 8
+  - 10
   directionChecks:
   - {fileID: 552296090413832286}
   - {fileID: 552296089835637831}
@@ -214,6 +217,7 @@ MonoBehaviour:
     m_Bits: 1
   changeSizeTime: 0.3
   changeSizeInterval: 0.03
+  isTitle: 0
 --- !u!1 &552296090413832257
 GameObject:
   m_ObjectHideFlags: 0
