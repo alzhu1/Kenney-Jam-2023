@@ -534,7 +534,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &260400309
 GameObject:
@@ -1080,6 +1080,99 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &544004999
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 544005001}
+  - component: {fileID: 544005000}
+  m_Layer: 0
+  m_Name: Audio Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &544005000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 544004999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e42fbcda84d4c498f938972b5c502cf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: BGM
+    clip: {fileID: 8300000, guid: afc9ad214160a418f8b889275b87c50e, type: 3}
+    volume: 0.2
+    loop: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: SwitchHit
+    clip: {fileID: 8300000, guid: eb17fd59165e64c4aa50c1b18c7b15e4, type: 3}
+    volume: 0.4
+    loop: 0
+    pitch: 1
+    source: {fileID: 0}
+  - name: ButtonClick
+    clip: {fileID: 8300000, guid: 0b164d9d0729842f6aab601c933130c5, type: 3}
+    volume: 0.8
+    loop: 0
+    pitch: 1.5
+    source: {fileID: 0}
+  - name: Grow
+    clip: {fileID: 8300000, guid: 334778426250b4020a049c912f529d87, type: 3}
+    volume: 0.4
+    loop: 0
+    pitch: 0.4
+    source: {fileID: 0}
+  - name: Shrink
+    clip: {fileID: 8300000, guid: 5a50435b8d9314ec391a15d29f4e3074, type: 3}
+    volume: 0.2
+    loop: 0
+    pitch: 0.6
+    source: {fileID: 0}
+  - name: LevelWin
+    clip: {fileID: 8300000, guid: f2840d85bfffa440b85d334d16e695bf, type: 3}
+    volume: 0.45
+    loop: 0
+    pitch: 1
+    source: {fileID: 0}
+  - name: Jump
+    clip: {fileID: 8300000, guid: aadddab51f204432caac7154645f4a41, type: 3}
+    volume: 0.1
+    loop: 0
+    pitch: 1.4
+    source: {fileID: 0}
+  - name: CannotGrow
+    clip: {fileID: 8300000, guid: a9a369d213ecc435a9356635c6d1c703, type: 3}
+    volume: 0.4
+    loop: 0
+    pitch: 0.5
+    source: {fileID: 0}
+--- !u!4 &544005001
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 544004999}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &573765950 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2463958032866714599, guid: 2b959d84e06de426b8d60fdfcf22c497, type: 3}
@@ -126195,7 +126288,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 4
-      m_TileSpriteIndex: 4
+      m_TileSpriteIndex: 5
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -126284,10 +126377,10 @@ Tilemap:
     m_Data: {fileID: -36562517, guid: 87e36d449858d40fd90175d42f60fd67, type: 3}
   - m_RefCount: 5
     m_Data: {fileID: -1362032033, guid: 87e36d449858d40fd90175d42f60fd67, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: 565443304, guid: 87e36d449858d40fd90175d42f60fd67, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 565443304, guid: 87e36d449858d40fd90175d42f60fd67, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 31
     m_Data:
