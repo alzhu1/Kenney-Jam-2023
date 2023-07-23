@@ -60,7 +60,6 @@ public class AudioManager : MonoBehaviour {
         return s;
     }
 
-    // TODO: Add options for volume/SFX adjustment and disabling?
     Sound Play(int i) {
         Sound s = sounds[i];
         if (s == null || s.source == null) {

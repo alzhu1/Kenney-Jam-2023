@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Title : MonoBehaviour {
     [SerializeField] private GameObject connectionParent;
+    [SerializeField] private Text congratsText;
 
     private Button[] buttons;
 
@@ -37,11 +38,16 @@ public class Title : MonoBehaviour {
     }
 
     void Start() {
+        bool beatAllLevels = true;
         for (int i = 0; i < buttons.Length; i++) {
             buttons[i].interactable = LevelManager.instance.IsLevelIndexAccessible(i + 1);
+            if (!buttons[i].interactable) {
+                beatAllLevels = false;
+            }
         }
 
         // Check connections
+        bool foundAllConnections = true;
         Image[] connections = connectionParent.GetComponentsInChildren<Image>();
         foreach (Image connection in connections) {
             // Probably a nicer way to do this, but whatever
@@ -52,10 +58,21 @@ public class Title : MonoBehaviour {
             Color connectionColor = connection.color;
             if (!LevelManager.instance.IsLevelIndexAccessible(fromIndex)) {
                 connectionColor.a = 0;
+                foundAllConnections = false;
             } else if (LevelManager.instance.IsConnectionVisible(fromIndex, toIndex)) {
                 connectionColor.a = 1;
+            } else {
+                foundAllConnections = false;
             }
             connection.color = connectionColor;
+        }
+
+        if (foundAllConnections) {
+            congratsText.text = "You beat all levels and found all connections! Awesome!!";
+        } else if (beatAllLevels) {
+            congratsText.text = "You beat all levels! Nice!";
+        } else {
+            congratsText.enabled = false;
         }
     }
 
